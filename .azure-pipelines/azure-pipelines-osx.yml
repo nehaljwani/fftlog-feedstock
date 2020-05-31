@@ -20,9 +20,6 @@ jobs:
       osx_numpy1.18python3.6.____73_pypy:
         CONFIG: osx_numpy1.18python3.6.____73_pypy
         UPLOAD_PACKAGES: 'True'
-      osx_python3.8.____cpython:
-        CONFIG: osx_python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
     maxParallel: 8
   timeoutInMinutes: 360
 
