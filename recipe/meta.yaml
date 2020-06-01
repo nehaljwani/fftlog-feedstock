@@ -11,21 +11,25 @@ source:
 
 build:
   number: 1
-  skip: True  # [win]
-  script: {{ PYTHON }} -m pip install . -vv
+  script:
+    - {{ PYTHON }} -m pip install . -vv  # [unix]
+    - {{ PYTHON }} -m pip install . -vv --global-option=build_ext --global-option --compiler=mingw32  # [win]
 
 requirements:
   build:
-    - {{ compiler('fortran') }}
+    - {{ compiler('fortran') }}        # [unix]
+    - {{ compiler('m2w64_fortran') }}  # [win]
   host:
     - pip
     - numpy
     - python
+    - m2w64-gcc-libgfortran   # [win]
   run:
     - python
     - scipy
     - libgfortran-ng          # [not win]
     - libgfortran             # [osx]
+    - {{ pin_compatible('m2w64-gcc-libgfortran', max_pin='x') }}   # [win]
 
 test:
   imports:
